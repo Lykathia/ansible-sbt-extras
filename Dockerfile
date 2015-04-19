@@ -6,11 +6,10 @@ MAINTAINER lykathia
 
 WORKDIR /tmp/ansible
 
-ADD ./test.yml /tmp/ansible/test.yml
+ADD ./tests /tmp/ansible/tests
 ADD ./tasks /tmp/ansible/tasks
 ADD ./files /tmp/ansible/files
 ADD ./vars /tmp/ansible/vars
 ADD ./meta /tmp/ansible/meta
-ADD ./example /tmp/ansible/inventory
 
-RUN ansible-playbook -i inventory test.yml -c local -vvvv
+RUN ansible-playbook -i tests/inventory tests/test.yml -c local -vvvv
