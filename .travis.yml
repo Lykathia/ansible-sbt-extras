@@ -1,0 +1,25 @@
+---
+language: python
+python: "2.7"
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install curl -y
+
+install:
+  - pip install -U ansible
+  - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
+
+script:
+  # Test: Syntax
+  - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
+  # Test: Initial Run
+  - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
+  # Test: Second Run
+  - >
+    ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+  # Test: sbt-extras installed
+  - sbt -h | grep -q '.sbtignore'

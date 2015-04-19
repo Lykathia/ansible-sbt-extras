@@ -1,4 +1,4 @@
 - hosts: localhost
   sudo: yes
   roles:
-    - { role: ./ }
+    - { role: ../../ }
