@@ -1,0 +1,15 @@
+---
+# tasks file for ansible-sbt-extras
+- name: sbt-extras | Download latest version
+  get_url:
+      url={{sbt_download_url}}
+      dest={{sbt_install_path}}
+      mode=0755
+
+- name: sbt-extras | Update alternatives to use sbt-extras for sbt
+  command: update-alternatives --install /usr/bin/sbt sbt {{sbt_install_path}} 1
+
+- name: sbt-extras | Install .sbtignore to user HOME directory
+  copy:
+      src=sbtignore
+      dest=~/.sbtignore

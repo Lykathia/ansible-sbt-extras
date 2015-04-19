@@ -1,0 +1,8 @@
+---
+# vars file for ansible-sbt-extras
+
+# Download link to the self-contained sbt-extras script
+sbt_download_url: "https://raw.githubusercontent.com/paulp/sbt-extras/master/sbt"
+
+# Location to install sbt-extras.
+sbt_install_path: "/usr/bin/sbt-extras"
